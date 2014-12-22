@@ -21,7 +21,10 @@ docker run -p 35357:35357 -p 5000:5000 -d garland/docker-openstack-keystone
 echo "Starting rabbitmq"
 docker run -p 5672:5672 -p 15672:15672 -d dockerfile/rabbitmq
 
+sleep 5
+
+source openrc
 sh keystone_basic.sh
-sh keystone_endpoint_basic.sh
+sh keystone_endpoints_basic.sh
 
 
