@@ -11,17 +11,11 @@
 # License: Apache Software License (ASL) 2.0
 #
 
-# Host address
-KEYSTONE_HOST_IP=127.0.0.1
-NEUTRON_HOST_IP=127.0.0.1
-
-# Keystone definitions
-KEYSTONE_REGION=RegionOne
-export SERVICE_TOKEN=ADMIN
-export SERVICE_ENDPOINT="http://${KEYSTONE_HOST_IP}:35357/v2.0"
-
-while getopts "d:u:D:p:m:K:R:E:T:vh" opt; do
+while getopts "H:d:u:D:p:m:K:R:E:T:vh" opt; do
   case $opt in
+    H)
+      KEYSTONE_HOST_IP=$OPTARG
+      ;;
     K)
       MASTER=$OPTARG
       ;;
@@ -39,7 +33,7 @@ while getopts "d:u:D:p:m:K:R:E:T:vh" opt; do
       ;;
     h)
       cat <<EOF
-Usage: $0  mysql_username] [-D mysql_database]
+Usage: $0 -H keystone_host_ip [-D mysql_database]
        [-K keystone_master ] [ -R keystone_region ] [ -E keystone_endpoint_url ]
        [ -T keystone_token ]
 
@@ -57,6 +51,15 @@ EOF
       ;;
   esac
 done
+
+# Host address
+NEUTRON_HOST_IP=127.0.0.1
+
+# Keystone definitions
+KEYSTONE_REGION=RegionOne
+export SERVICE_TOKEN=ADMIN
+export SERVICE_ENDPOINT="http://${KEYSTONE_HOST_IP}:35357/v2.0"
+
 
 if [ -z "$KEYSTONE_REGION" ]; then
   echo "Keystone region not set. Please set with -R option or set KEYSTONE_REGION variable." >&2

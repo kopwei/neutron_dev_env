@@ -9,7 +9,7 @@
 # Support: openstack@lists.launchpad.net
 # License: Apache Software License (ASL) 2.0
 #
-HOST_IP=127.0.0.1
+HOST_IP=$1
 ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin_pass}
 SERVICE_PASSWORD=${SERVICE_PASSWORD:-service_pass}
 export SERVICE_TOKEN="ADMIN"
