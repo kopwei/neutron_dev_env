@@ -39,10 +39,12 @@ sleep 10
 source openrc
 echo "Preparing keystone tenants and endpoints... "
 if [ "$(uname)" == "Darwin" ]; then
-   docker_ip=$(boot2docker ip)
-   sh keystone_basic.sh ${docker_ip} > /dev/null 2>&1
-   sh keystone_endpoints_basic.sh -H ${docker_ip} > /dev/null 2>&1
+    docker_ip=$(boot2docker ip)
+    mysql -uroot -pneutron -h${docker_ip} -e "CREATE DATABASE IF NOT EXISTS neutron"
+    sh keystone_basic.sh ${docker_ip} > /dev/null 2>&1
+    sh keystone_endpoints_basic.sh -H ${docker_ip} > /dev/null 2>&1
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    mysql -uroot -pneutron -h127.0.0.1 -e "CREATE DATABASE IF NOT EXISTS neutron"
     sh keystone_basic.sh "127.0.0.1" > /dev/null 2>&1
     sh keystone_endpoints_basic.sh -H "127.0.0.1" > /dev/null 2>&1
 fi
