@@ -1,5 +1,11 @@
 export OS_TENANT_NAME=admin
 export OS_USERNAME=admin
 export OS_PASSWORD=admin_pass
-export OS_AUTH_URL="http://127.0.0.1:5000/v2.0/"
+if [ "$(uname)" == "Darwin" ]; then
+    docker_ip=$(boot2docker ip)
+else
+    docker_ip="127.0.0.1"
+fi
+export OS_AUTH_URL="http://${docker_ip}:5000/v2.0/"
+export OS_SERVICE_ENDPOINT="http://${docker_ip}:35357/v2.0/"
 export OS_SERVICE_TOKEN=7a04a385b907caca141f
