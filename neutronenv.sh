@@ -15,7 +15,7 @@ echo "Stopping existing containers"
 echo
 # Stop and clear the existing containers
 for i in "mysql" "garland/docker-openstack-keystone" "dockerfile/rabbitmq"; do
-    container_id=$(docker ps | grep $i | awk {'print $1'})
+    container_id=$(docker ps -a | grep $i | awk {'print $1'})
     if [ -z $container_id ];then
         :
     else
