@@ -33,7 +33,7 @@ docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=neutron -d mysql > /
 echo "Starting keystone"
 docker run -p 35357:35357 -p 5000:5000 -d garland/docker-openstack-keystone > /dev/null 2>&1 || exit 1
 echo "Starting rabbitmq"
-docker run -p 5672:5672 -p 15672:15672 -d dockerfile/rabbitmq > /dev/null 2>&1 || exit 1
+docker run -p 5672:5672 -p 15672:15672 -d rabbitmq > /dev/null 2>&1 || exit 1
 
 sleep 10
 
