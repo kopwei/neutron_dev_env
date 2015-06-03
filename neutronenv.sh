@@ -16,9 +16,7 @@ echo
 # Stop and clear the existing containers
 for i in "mysql:latest" "garland/docker-openstack-keystone" "rabbitmq:latest"; do
     container_id=$(docker ps -a | grep $i | awk {'print $1'})
-    if [ -z "${container_id}" ];then
-        :
-    else
+    if [ -n "${container_id}" ];then
         echo "Stopping ${i}"
         docker stop $container_id > /dev/null 2>&1
         docker rm -f $container_id > /dev/null 2>&1
